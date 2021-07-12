@@ -56,7 +56,7 @@ opm alpha validate index
 ## 5. Build & Push a catalog image
 ##
 cat << EOF > index.Dockerfile
-FROM quay.io/joelanford/opm:latest as builder
+FROM quay.io/operator-framework/upstream-opm-builder:latest as builder
 
 FROM scratch
 COPY --from=builder /bin/opm /bin/opm
@@ -130,15 +130,15 @@ opm alpha render ${IMAGE_TAG_BASE}-index:latest > index-dl/index.yaml
 ##
 ## 2. List contents
 ##
-opm alpha list packages index-dl
-opm alpha list channels index-dl demo-operator
-opm alpha list bundles index-dl demo-operator
+opm list packages index-dl
+opm list channels index-dl demo-operator
+opm list bundles index-dl demo-operator
 rm -rf index-dl
 
 ## OR without first downloading 
-opm alpha list packages ${IMAGE_TAG_BASE}-index:latest
-opm alpha list channels ${IMAGE_TAG_BASE}-index:latest demo-operator
-opm alpha list bundles ${IMAGE_TAG_BASE}-index:latest demo-operator
+opm list packages ${IMAGE_TAG_BASE}-index:latest
+opm list channels ${IMAGE_TAG_BASE}-index:latest demo-operator
+opm list bundles ${IMAGE_TAG_BASE}-index:latest demo-operator
 
 ##
 ## 3. Draw update graphs
